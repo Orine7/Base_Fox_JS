@@ -1,9 +1,8 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent } from 'react'
 
 type Props = {}
 
 const Navbar: FunctionComponent<Props> = () => {
-  const [navbarOpen, setNavbarOpen] = useState(false)
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-6 bg-orange-fox-orange">
@@ -15,26 +14,13 @@ const Navbar: FunctionComponent<Props> = () => {
             >
               Base Fox Treinamentos
             </a>
-            <button
-              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-              type="button"
-              onClick={() => setNavbarOpen(!navbarOpen)}
-            >
-              <i className="fas fa-bars"></i>
-            </button>
           </div>
-          <div
-            className={
-              'lg:flex flex-grow items-center' +
-              (navbarOpen ? ' flex' : ' hidden')
-            }
-            id="example-navbar-danger"
-          >
+          <div className={'lg:flex flex-grow items-center'}>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="nav-item">
                 <a
                   className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="/sobre"
+                  href="#about"
                 >
                   <span className="ml-2">Sobre</span>
                 </a>
@@ -42,17 +28,17 @@ const Navbar: FunctionComponent<Props> = () => {
               <li className="nav-item">
                 <a
                   className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="/instrutores"
+                  href="#staff"
                 >
-                  <span className="ml-2">Instrutores</span>
+                  <span className="ml-2">Equipe</span>
                 </a>
               </li>
               <li className="nav-item">
                 <a
                   className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="/taekwondo"
+                  href="#classes"
                 >
-                  <span className="ml-2">Taekwondo</span>
+                  <span className="ml-2">Aulas</span>
                 </a>
               </li>
               <li className="nav-item">
@@ -60,7 +46,7 @@ const Navbar: FunctionComponent<Props> = () => {
                   className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="/personal"
                 >
-                  <span className="ml-2">Personal</span>
+                  <span className="ml-2">Login/Cadastro</span>
                 </a>
               </li>
             </ul>
