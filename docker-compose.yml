@@ -13,7 +13,7 @@ services:
     api:
         build:
             dockerfile: Dockerfile
-            context: .
+            context: backend
             target: development
         command: npm run start:dev
         ports:
@@ -25,12 +25,9 @@ services:
             DATABASE_HOST: postgres
 
         volumes:
-            - .:/orine/src/app
-            - nodemodules:/orine/src/app/node_modules
+            - ./backend:/orine/src/app
+            - ./backend/node_modules:/orine/src/app/node_modules
         links:
             - postgres
         depends_on: 
             - postgres
-
-volumes:
-    nodemodules: {}
