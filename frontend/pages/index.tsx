@@ -2,9 +2,27 @@ import type { NextPage } from 'next'
 import Navbar from '../components/Navbar'
 
 const Home: NextPage = () => {
+  const locations = [
+    {
+      name: 'A Base',
+      goesTo: '#about',
+    },
+    {
+      name: 'Aulas',
+      goesTo: '#classes',
+    },
+    {
+      name: 'Equipe Fox',
+      goesTo: '#staff',
+    },
+    {
+      name: 'Login/Cadastro',
+      goesTo: '/entrar',
+    },
+  ]
   return (
     <>
-      <Navbar />
+      <Navbar locations={locations} />
       <main>
         <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-[90vh]">
           <div className="absolute top-0 w-full h-full bg-center bg-cover">
@@ -43,11 +61,12 @@ const Home: NextPage = () => {
                   eget. Quisque rutrum odio tortor, non mattis tellus placerat
                   ut. Phasellus vel imperdiet dolor.
                 </p>
-                <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
-                  In aliquet sed magna ac dictum. Nunc ullamcorper semper
-                  egestas. Integer et commodo odio, et facilisis magna. Ut sit
-                  amet mauris massa.
-                </p>
+                <a
+                  className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
+                  href="/sobre"
+                >
+                  <span className="ml-2">Saiba mais!</span>
+                </a>
               </div>
             </div>
           </div>
@@ -67,11 +86,18 @@ const Home: NextPage = () => {
                   eget. Quisque rutrum odio tortor, non mattis tellus placerat
                   ut. Phasellus vel imperdiet dolor.
                 </p>
-                <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
-                  In aliquet sed magna ac dictum. Nunc ullamcorper semper
-                  egestas. Integer et commodo odio, et facilisis magna. Ut sit
-                  amet mauris massa.
-                </p>
+                <a
+                  className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
+                  href="/taekwondo"
+                >
+                  <span className="ml-2">Taekwondo</span>
+                </a>
+                <a
+                  className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
+                  href="/personal"
+                >
+                  <span className="ml-2">Personal</span>
+                </a>
               </div>
             </div>
           </div>
@@ -91,11 +117,12 @@ const Home: NextPage = () => {
                   eget. Quisque rutrum odio tortor, non mattis tellus placerat
                   ut. Phasellus vel imperdiet dolor.
                 </p>
-                <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
-                  In aliquet sed magna ac dictum. Nunc ullamcorper semper
-                  egestas. Integer et commodo odio, et facilisis magna. Ut sit
-                  amet mauris massa.
-                </p>
+                <a
+                  className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
+                  href="/instrutores"
+                >
+                  <span className="ml-2">Veja mais sobre nossa equipe</span>
+                </a>
               </div>
             </div>
           </div>
