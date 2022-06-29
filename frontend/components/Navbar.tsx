@@ -24,7 +24,7 @@ const Navbar: FunctionComponent<Props> = ({ locations }) => {
           <div className={'lg:flex flex-grow items-center'}>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               {locations.map((x) => (
-                <li className="nav-item">
+                <li className="nav-item" key={x.goesTo}>
                   <a
                     className="px-3 py-2 flex items-center text-base uppercase font-bold leading-snug text-white hover:opacity-75"
                     href={x.goesTo}

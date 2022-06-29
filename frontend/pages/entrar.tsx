@@ -9,16 +9,16 @@ const Entrar: NextPage = () => {
     return email.length > 0 && password.length > 0
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault()
     console.log('submited')
   }
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+      <div className="min-h-screen bg-orange-200 py-6 flex flex-col justify-center sm:py-12">
         <div className="relative py-3 w-11/12 max-w-xl sm:mx-auto">
-          <div className="relative p-8 bg-white shadow-sm sm:rounded-xl">
+          <div className="relative p-8 bg-cyan-300 shadow-sm sm:rounded-xl">
             <form className="w-full" onSubmit={handleSubmit}>
               <div className="mb-5 relative">
                 <input
@@ -47,7 +47,7 @@ const Entrar: NextPage = () => {
               <button
                 type="submit"
                 disabled={!validateForm()}
-                className="w-full bg-indigo-600 text-white p-3 rounded-md disabled:bg-slate-200"
+                className="w-full bg-orange-400 text-white p-3 rounded-md disabled:bg-cyan-100 disabled:text-slate-400"
               >
                 Submit
               </button>
