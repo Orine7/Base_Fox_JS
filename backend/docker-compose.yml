@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+    postgres:
+        image: postgres:12
+        environment:
+          POSTGRES_PASSWORD: "123456"
+          POSTGRES_USER: "postgres"
+          POSTGRES_DB: "base_fox"
+          DATABASE_HOST: postgres
+        ports:
+            - 5432:5432
+
+    api:
+        build:
+            dockerfile: Dockerfile
+            context: .
+            target: development
+        command: npm run start:dev
+        ports:
+            - 4000:4000
+        environment: 
+            POSTGRES_PASSWORD: "123456"
+            POSTGRES_USER: "postgres"
+            POSTGRES_DB: "base_fox"
+            DATABASE_HOST: postgres
+
+        volumes:
+            - .:/orine/src/app
+            - nodemodules:/orine/src/app/node_modules
+        links:
+            - postgres
+        depends_on: 
+            - postgres
+
+volumes:
+    nodemodules: {}
