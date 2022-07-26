@@ -10,24 +10,24 @@ services:
         ports:
             - 5432:5432
 
-    api:
-        build:
-            dockerfile: Dockerfile
-            context: backend
-            target: development
-        command: npm run start:dev
-        ports:
-            - 4000:4000
-        environment: 
-            POSTGRES_PASSWORD: "123456"
-            POSTGRES_USER: "postgres"
-            POSTGRES_DB: "base_fox"
-            DATABASE_HOST: postgres
+    # api:
+    #     build:
+    #         dockerfile: Dockerfile
+    #         context: backend
+    #         target: development
+    #     command: npm run start:dev
+    #     ports:
+    #         - 4000:4000
+    #     environment: 
+    #         POSTGRES_PASSWORD: "123456"
+    #         POSTGRES_USER: "postgres"
+    #         POSTGRES_DB: "base_fox"
+    #         DATABASE_HOST: postgres
 
-        volumes:
-            - ./backend:/orine/src/app
-            - ./backend/node_modules:/orine/src/app/node_modules
-        links:
-            - postgres
-        depends_on: 
-            - postgres
+        # volumes:
+        #     - ./backend:/orine/src/app
+        #     - ./backend/node_modules:/orine/src/app/node_modules
+        # links:
+        #     - postgres
+        # depends_on: 
+        #     - postgres
