@@ -8,11 +8,11 @@ import {
   Post,
   Request,
   UseGuards,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersService } from './users.service';
+} from '@nestjs/common'
+import { AuthGuard } from '@nestjs/passport'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { UsersService } from './users.service'
 
 @Controller('users')
 export class UsersController {
@@ -22,28 +22,30 @@ export class UsersController {
   async create(@Body() createUserDto: CreateUserDto) {
     const { password, ...result } = await this.usersService.create(
       createUserDto,
-    );
-    return result;
+    )
+    console.log(result)
+    return result
   }
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req) {
-    return req.user;
+    //console.log(req)
+    return req.user
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(id);
+    return this.usersService.findOne(id)
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+    return this.usersService.update(+id, updateUserDto)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    return this.usersService.remove(+id)
   }
 }

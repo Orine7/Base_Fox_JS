@@ -48,6 +48,7 @@ const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const app_controller_1 = __webpack_require__("./apps/backend/src/app/app.controller.ts");
 const app_service_1 = __webpack_require__("./apps/backend/src/app/app.service.ts");
 const auth_module_1 = __webpack_require__("./apps/backend/src/app/auth/auth.module.ts");
+const user_entity_1 = __webpack_require__("./apps/backend/src/app/users/entities/user.entity.ts");
 const users_module_1 = __webpack_require__("./apps/backend/src/app/users/users.module.ts");
 let AppModule = class AppModule {
 };
@@ -61,11 +62,12 @@ AppModule = tslib_1.__decorate([
                 useFactory: (configService) => ({
                     type: 'postgres',
                     host: configService.get('DATABASE_HOST'),
-                    port: 5432,
+                    port: configService.get('DATABASE_PORT'),
                     username: configService.get('POSTGRES_USER'),
                     password: configService.get('POSTGRES_PASSWORD'),
                     database: configService.get('POSTGRES_DB'),
-                    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                    //TODO: add a more generic way to make this work
+                    entities: [user_entity_1.UserEntity],
                     synchronize: true,
                     retryAttempts: 3,
                 }),
@@ -312,11 +314,13 @@ let UsersController = class UsersController {
     create(createUserDto) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const _a = yield this.usersService.create(createUserDto), { password } = _a, result = tslib_1.__rest(_a, ["password"]);
+            console.log(result);
             return result;
         });
     }
     login(req) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            //console.log(req)
             return req.user;
         });
     }
@@ -577,6 +581,7 @@ function bootstrap() {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const app = yield core_1.NestFactory.create(app_module_1.AppModule);
         const globalPrefix = 'api';
+        app.enableCors();
         app.setGlobalPrefix(globalPrefix);
         const port = process.env.PORT || 3333;
         app.useGlobalPipes(new common_1.ValidationPipe());

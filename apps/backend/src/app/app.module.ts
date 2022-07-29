@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { AuthModule } from './auth/auth.module'
+import { UserEntity } from './users/entities/user.entity'
+import { UsersModule } from './users/users.module'
 
 @Module({
   imports: [
@@ -15,11 +16,12 @@ import { UsersModule } from './users/users.module';
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get('DATABASE_HOST'),
-        port: 5432,
+        port: configService.get('DATABASE_PORT'),
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        //TODO: add a more generic way to make this work
+        entities: [UserEntity],
         synchronize: true,
         retryAttempts: 3,
       }),

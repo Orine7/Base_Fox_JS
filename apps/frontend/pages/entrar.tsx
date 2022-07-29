@@ -11,7 +11,22 @@ const Entrar: NextPage = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
-    //const res =  await fetch('http://localhost:4000/api/users/login', {body: })
+    console.log(`Email: ${email}`)
+    console.log(`Password: ${password}`)
+    const res = await fetch('http://localhost:3333/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((rejected) => {
+        console.log(rejected)
+      })
   }
 
   return (
@@ -30,7 +45,7 @@ const Entrar: NextPage = () => {
                   autoComplete="off"
                 />
                 <label className="peer-placeholder-shown:opacity-100   opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
-                  Email address
+                  Endereço de Email
                 </label>
               </div>
               <div className="mb-5 relative">
@@ -42,15 +57,18 @@ const Entrar: NextPage = () => {
                   autoComplete="off"
                 />
                 <label className="peer-placeholder-shown:opacity-100   opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
-                  Password
+                  Senha
                 </label>
+              </div>
+              <div className="mb-5 relative text-center">
+                <a href="/cadastro">Não possui cadastro?</a>
               </div>
               <button
                 type="submit"
                 disabled={!validateForm()}
                 className="w-full bg-orange-400 text-white p-3 rounded-md disabled:bg-cyan-100 disabled:text-slate-400"
               >
-                Submit
+                Login
               </button>
             </form>
           </div>
