@@ -11,7 +11,8 @@ export class AuthService {
     pass: string,
   ): Promise<{ id: string; name: string; email: string } | null> {
     const user = await this.usersService.findOneByEmail(email)
-    if (user && compare(pass, user.password)) {
+
+    if (user && (await compare(pass, user.password))) {
       const { password, ...result } = user
       return result
     }

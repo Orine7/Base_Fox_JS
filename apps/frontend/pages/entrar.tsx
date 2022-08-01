@@ -1,8 +1,10 @@
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const Entrar: NextPage = () => {
   const [email, setEmail] = useState('')
+  const router = useRouter()
   const [password, setPassword] = useState('')
 
   function validateForm() {
@@ -11,8 +13,6 @@ const Entrar: NextPage = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
-    console.log(`Email: ${email}`)
-    console.log(`Password: ${password}`)
     const res = await fetch('http://localhost:3333/api/users/login', {
       method: 'POST',
       headers: {
@@ -22,10 +22,12 @@ const Entrar: NextPage = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        if (data.statusCode != 401) {
+          router.push('aluno')
+        }
       })
       .catch((rejected) => {
-        console.log(rejected)
+        throw new Error('Ocorreu um erro na autenticação')
       })
   }
 
@@ -40,7 +42,7 @@ const Entrar: NextPage = () => {
                   type="email"
                   name="email"
                   className="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent"
-                  placeholder="name@example.com"
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="off"
                 />
@@ -52,7 +54,7 @@ const Entrar: NextPage = () => {
                 <input
                   type="password"
                   className="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent"
-                  placeholder="password"
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="off"
                 />
@@ -60,9 +62,7 @@ const Entrar: NextPage = () => {
                   Senha
                 </label>
               </div>
-              <div className="mb-5 relative text-center">
-                <a href="/cadastro">Não possui cadastro?</a>
-              </div>
+
               <button
                 type="submit"
                 disabled={!validateForm()}
@@ -71,6 +71,9 @@ const Entrar: NextPage = () => {
                 Login
               </button>
             </form>
+            <div className="mt-5 relative text-center">
+              <a href="/cadastro">Não possui cadastro?</a>
+            </div>
           </div>
         </div>
       </div>

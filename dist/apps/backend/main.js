@@ -148,7 +148,7 @@ let AuthService = class AuthService {
     validateUser(email, pass) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const user = yield this.usersService.findOneByEmail(email);
-            if (user && (0, bcrypt_1.compare)(pass, user.password)) {
+            if (user && (yield (0, bcrypt_1.compare)(pass, user.password))) {
                 const { password } = user, result = tslib_1.__rest(user, ["password"]);
                 return result;
             }
@@ -320,7 +320,6 @@ let UsersController = class UsersController {
     }
     login(req) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            //console.log(req)
             return req.user;
         });
     }

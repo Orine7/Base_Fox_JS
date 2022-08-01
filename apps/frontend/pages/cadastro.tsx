@@ -12,8 +12,6 @@ const Entrar: NextPage = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
-    console.log(`Email: ${email}`)
-    console.log(`Password: ${password}`)
     const res = await fetch('http://localhost:3333/api/users', {
       method: 'POST',
       headers: {
@@ -22,13 +20,9 @@ const Entrar: NextPage = () => {
       body: JSON.stringify({ email, password, name }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        //console.log(data)
-      })
       .catch((rejected) => {
         console.log('fetch rejected')
       })
-    console.log(res)
   }
 
   return (
