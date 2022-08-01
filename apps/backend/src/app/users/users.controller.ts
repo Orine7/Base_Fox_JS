@@ -1,3 +1,4 @@
+import { Role } from '@Base_Fox_JS/helper'
 import {
   Body,
   Controller,
@@ -10,11 +11,14 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
+import { Roles } from '../../assets/decorators/roles.decorators'
+import { RolesGuard } from '../auth/guards/roles.guard'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UsersService } from './users.service'
 
 @Controller('users')
+@UseGuards(RolesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -34,6 +38,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @Roles(Role.Admin)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id)
   }

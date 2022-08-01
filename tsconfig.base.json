@@ -17,7 +17,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@Base_Fox_JS/helper": [
+        "libs/helper/src/index.ts"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
